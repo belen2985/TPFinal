@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-import datetime
+from datetime import date
 from cliente import Cliente
 from clienteCorporativo import ClienteCorporativo
 from clienteParticular import ClienteParticular
@@ -31,7 +31,7 @@ class Trabajo:
         cadena += f"Fecha de entrega propuesta: {self.fecha_entrega_propuesta}\n"
         cadena += f"Fecha de entrega real: {self.fecha_entrega_real}\n"
         cadena += f"Descripción: {self.descripcion}\n"
-        if retirado:
+        if self.retirado:
             cadena += f"Retirado: SI\n"
         else:
             cadena += f"Retirado: NO\n"

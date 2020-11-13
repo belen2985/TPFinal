@@ -9,6 +9,8 @@ from repositorioClientes import RepositorioClientes
 from repositorioTrabajos import RepositorioTrabajos
 import sys
 from listaClientes import ListaClientes
+from datetime import datetime
+import datetime
 
 class Menu:
     '''Mostrar un menú y responder a las opciones'''
@@ -21,6 +23,7 @@ class Menu:
             "3": self.eliminar_cliente,
             "4": self.modificar_cliente,
             "5": self.mostrar_trabajos,
+            "6": self.nuevo_trabajo,
             "0": self.salir
         }
 
@@ -32,6 +35,7 @@ Menú del sistema:
 3. Baja de cliente
 4. Modificación de cliente
 5. Mostrar todos los trabajos
+6. Cargar nuevo trabajo
 0. Salir
 """)
 
@@ -109,6 +113,23 @@ Menú del sistema:
         for trabajo in lista:
             print(trabajo)
             print("=====================================")
+
+    def nuevo_trabajo(self):
+        nc = input ("Ingrese el Nro de Cliente: ")
+        cliente = self.lista_clientes.buscar_cliente(nc)
+        fecha_ingreso = datetime.date.today()
+        fep = input("Ingrese la fecha de entrega propuesta (AAAA-MM-DD): ")
+        fecha_entrega_propuesta = datetime.datetime.strptime(fep, "%Y-%m-%d").date()
+        fecha_entrega_real = None
+        descripcion = input("Ingrese descripción del trabajo: ")
+        retirado = False
+
+        trabajo = self.lista_trabajos.nuevo_trabajo(cliente, fecha_ingreso, fecha_entrega_propuesta, fecha_entrega_real, descripcion, retirado)
+
+        if trabajo is None:
+            print("Error al cargar el trabajo")
+        else:
+            print("Trabajo cargado con éxito")
     
     def salir(self):
         print("Gracias por utilizar el sistema.")

@@ -27,11 +27,18 @@ class ListaClientes:
             self.lista.append(c)
             return c
 
+    def buscar_cliente(self, id_cliente):
+        '''Recibe un id del cliente y lo busca en la lista, devuelve el cliente'''
+        for c in self.lista:
+            if c.id_cliente == id_cliente:
+                break
+        return c
+
     def eliminar_cliente(self, id_cliente):
-        c = self.rc.get_one(id_cliente)
+        c = self.buscar_cliente(id_cliente)
         eliminado = self.rc.delete(c)
         if eliminado:
-            self.lista = self.rc.get_all()
+            self.lista.remove(c)
             return True
         else:
             return False
