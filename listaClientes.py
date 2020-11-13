@@ -35,3 +35,11 @@ class ListaClientes:
             return True
         else:
             return False
+
+    def modificar_cliente(self, cliente):
+        modificado = self.rc.update(cliente)
+        if modificado:
+            self.lista = self.rc.get_all()
+            return True
+        else:
+            return False

@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+from clienteCorporativo import ClienteCorporativo
 import sys
 from listaClientes import ListaClientes
 
@@ -10,6 +11,7 @@ class Menu:
             "1": self.mostrar_clientes,
             "2": self.nuevo_cliente,
             "3": self.eliminar_cliente,
+            "4": self.modificar_cliente,
             "0": self.salir
         }
 
@@ -19,6 +21,7 @@ Menú del sistema:
 1. Mostrar todos los clientes
 2. Alta de cliente
 3. Baja de cliente
+4. Modificación de cliente
 0. Salir
 """)
 
@@ -68,6 +71,27 @@ Menú del sistema:
             print ("Cliente eliminado correctamente")
         else:
             print ("El cliente no se pudo eliminar")
+
+    def modificar_cliente(self):
+        nc = input ("Ingrese el Nro de Cliente a modificar: ")
+        c = self.lista_clientes.rc.get_one(nc)
+        
+        if type(c) is ClienteCorporativo:
+            c.nombre_empresa = input("Ingrese el nombre de la empresa: ")
+            c.telefono = input("Ingrese el teléfono de la empresa: ")
+            c.nombre_contacto = input("Ingrese el nombre del contacto: ")
+            c.telefono_contacto = input("Ingrese el teléfono del contacto: ")
+            c.mail = input("Ingrese el e-mail: ")
+        else:
+            c.nombre = input("Ingrese el nombre: ")
+            c.apellido = input("Ingrese el apellido: ")
+            c.telefono = input("Ingrese el teléfono: ")
+            c.mail = input("Ingrese el e-mail: ")        
+        modificado = self.lista_clientes.modificar_cliente(c)
+        if modificado:
+            print ("Cliente modificado correctamente")
+        else:
+            print ("El cliente no se pudo modificar")
     
     def salir(self):
         print("Gracias por utilizar el sistema.")
