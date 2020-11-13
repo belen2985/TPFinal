@@ -9,6 +9,7 @@ class Menu:
         self.opciones = {
             "1": self.mostrar_clientes,
             "2": self.nuevo_cliente,
+            "3": self.eliminar_cliente,
             "0": self.salir
         }
 
@@ -17,6 +18,7 @@ class Menu:
 Menú del sistema:
 1. Mostrar todos los clientes
 2. Alta de cliente
+3. Baja de cliente
 0. Salir
 """)
 
@@ -37,6 +39,7 @@ Menú del sistema:
         for cliente in lista:
             print(cliente)
             print("=====================================")
+            
     def nuevo_cliente(self):
         tipo = "A"
         while tipo not in ("C","c","P","p"):
@@ -56,8 +59,16 @@ Menú del sistema:
         if c is None:
             print("Error al cargar el cliente")
         else:
-            print("Cliente cargado con éxito")       
-
+            print("Cliente cargado con éxito")
+            
+    def eliminar_cliente(self):
+        nc = input ("Ingrese el Nro de Cliente a dar de baja: ")
+        eliminado = self.lista_clientes.eliminar_cliente(nc)
+        if eliminado:
+            print ("Cliente eliminado correctamente")
+        else:
+            print ("El cliente no se pudo eliminar")
+    
     def salir(self):
         print("Gracias por utilizar el sistema.")
         sys.exit(0)

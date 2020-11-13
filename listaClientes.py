@@ -26,3 +26,12 @@ class ListaClientes:
         else:
             self.lista.append(c)
             return c
+
+    def eliminar_cliente(self, id_cliente):
+        c = self.rc.get_one(id_cliente)
+        eliminado = self.rc.delete(c)
+        if eliminado:
+            self.lista = self.rc.get_all()
+            return True
+        else:
+            return False
