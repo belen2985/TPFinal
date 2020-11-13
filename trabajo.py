@@ -1,6 +1,10 @@
 #! /usr/bin/python3
 
 import datetime
+from cliente import Cliente
+from clienteCorporativo import ClienteCorporativo
+from clienteParticular import ClienteParticular
+
 
 class Trabajo:
     '''Representa un trabajo de reparación que realizará el taller'''
@@ -16,4 +20,20 @@ class Trabajo:
         self.descripcion = descripcion
         self.retirado = retirado
         self.id_trabajo = id_trabajo
+
+    def __str__(self):
+        cadena = f"Trabajo nro: {self.id_trabajo}\n"
+        if type(self.cliente) is ClienteCorporativo:
+            cadena += f"Cliente: {self.cliente.id_cliente} - {self.cliente.nombre_empresa}\n"
+        else:
+            cadena += f"Cliente: {self.cliente.id_cliente} - {self.cliente.nombre} {self.cliente.apellido}\n"
+        cadena += f"Fecha de ingreso: {self.fecha_ingreso}\n"
+        cadena += f"Fecha de entrega propuesta: {self.fecha_entrega_propuesta}\n"
+        cadena += f"Fecha de entrega real: {self.fecha_entrega_real}\n"
+        cadena += f"Descripción: {self.descripcion}\n"
+        if retirado:
+            cadena += f"Retirado: SI\n"
+        else:
+            cadena += f"Retirado: NO\n"
+        return cadena
 

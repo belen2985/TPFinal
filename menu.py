@@ -1,5 +1,12 @@
 #! /usr/bin/env python3
+from listaTrabajos import ListaTrabajos
+from cliente import Cliente
 from clienteCorporativo import ClienteCorporativo
+from clienteParticular import ClienteParticular
+from trabajo import Trabajo
+from repositorio import Repositorio
+from repositorioClientes import RepositorioClientes
+from repositorioTrabajos import RepositorioTrabajos
 import sys
 from listaClientes import ListaClientes
 
@@ -7,11 +14,13 @@ class Menu:
     '''Mostrar un menú y responder a las opciones'''
     def __init__(self):
         self.lista_clientes = ListaClientes()
+        self.lista_trabajos = ListaTrabajos()
         self.opciones = {
             "1": self.mostrar_clientes,
             "2": self.nuevo_cliente,
             "3": self.eliminar_cliente,
             "4": self.modificar_cliente,
+            "5": self.mostrar_trabajos,
             "0": self.salir
         }
 
@@ -22,6 +31,7 @@ Menú del sistema:
 2. Alta de cliente
 3. Baja de cliente
 4. Modificación de cliente
+5. Mostrar todos los trabajos
 0. Salir
 """)
 
@@ -92,6 +102,13 @@ Menú del sistema:
             print ("Cliente modificado correctamente")
         else:
             print ("El cliente no se pudo modificar")
+
+    def mostrar_trabajos(self, lista=None):
+        if lista == None:
+            lista = self.lista_trabajos.lista
+        for trabajo in lista:
+            print(trabajo)
+            print("=====================================")
     
     def salir(self):
         print("Gracias por utilizar el sistema.")
